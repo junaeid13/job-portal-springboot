@@ -20,6 +20,14 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    implementation("org.webjars:bootstrap:5.3.7")
+    // https://mvnrepository.com/artifact/org.webjars/jquery
+    implementation("org.webjars:jquery:3.7.1")
+    // https://mvnrepository.com/artifact/org.webjars/webjars-locator
+    implementation("org.webjars:webjars-locator:0.52")
+    // https://mvnrepository.com/artifact/org.webjars/font-awesome
+    implementation("org.webjars:font-awesome:6.7.2")
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
