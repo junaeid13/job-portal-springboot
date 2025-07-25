@@ -6,18 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users_type")
-public class UserTypes {
+public class UsersType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,4 +25,11 @@ public class UserTypes {
     @OneToMany(targetEntity = Users.class, mappedBy = "userTypeId", cascade = CascadeType.ALL)
     private List<Users> users;
 
+
+
+
+    public UsersType(Long i, String recruter) {
+        this.userTypeId = i;
+        this.userTypeName = recruter;
+    }
 }
