@@ -3,6 +3,7 @@ package com.junaeid.jobportal.controller;
 import com.junaeid.jobportal.entity.Users;
 import com.junaeid.jobportal.entity.UsersType;
 import com.junaeid.jobportal.repository.UsersTypeRepository;
+import com.junaeid.jobportal.services.UsersService;
 import com.junaeid.jobportal.services.UsersTypeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,12 @@ import java.util.List;
 public class UsersController {
 
     private final UsersTypeService usersTypeService;
+    private final UsersService usersService;
 
     @Autowired
-    public UsersController(UsersTypeService usersTypeService) {
+    public UsersController(UsersTypeService usersTypeService, UsersService userService) {
         this.usersTypeService = usersTypeService;
+        this.usersService = userService;
     }
 
     @GetMapping("/register")
@@ -39,6 +42,7 @@ public class UsersController {
     @PostMapping("/register/new")
     public String userRegistration(@Valid Users users) {
         System.out.println("User::" + users);
+        usersService.addNew(users);
         return "dashboard";
 
     }

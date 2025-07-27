@@ -26,8 +26,6 @@ public class UsersType {
     private List<Users> users;
 
 
-
-
     public UsersType(Long i, String recruter) {
         this.userTypeId = i;
         this.userTypeName = recruter;
