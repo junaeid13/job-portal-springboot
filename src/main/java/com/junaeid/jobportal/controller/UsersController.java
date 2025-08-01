@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class UsersController {
@@ -32,8 +29,7 @@ public class UsersController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        //List<UsersType> usersTypes = usersTypeService.getAll();
-        List<UsersType> usersTypes = Collections.singletonList(new UsersType(1l, "Recruter"));
+        List<UsersType> usersTypes = usersTypeService.getAll();
         model.addAttribute("getAllTypes", usersTypes);
         model.addAttribute("user", new Users());
         return "register";
@@ -46,7 +42,7 @@ public class UsersController {
 
         if (optionalUsers.isPresent()) {
             model.addAttribute("error", "Email already exists");
-            List<UsersType> usersTypes = Collections.singletonList(new UsersType(1l, "Recruter"));
+            List<UsersType> usersTypes = usersTypeService.getAll();
             model.addAttribute("getAllTypes", usersTypes);
             model.addAttribute("user", new Users());
             return "register";

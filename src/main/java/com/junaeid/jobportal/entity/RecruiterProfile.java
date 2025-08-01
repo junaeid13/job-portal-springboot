@@ -27,4 +27,8 @@ public class RecruiterProfile {
     private String company;
     @Column(nullable = true, length = 64)
     private String profilePhoto;
+
+    public RecruiterProfile(Users savedUser) {
+        this.user = savedUser;
+    }
 }

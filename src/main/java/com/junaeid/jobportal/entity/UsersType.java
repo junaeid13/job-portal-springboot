@@ -19,15 +19,14 @@ public class UsersType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userTypeId;
+    private int userTypeId;
     private String userTypeName;
 
     @OneToMany(targetEntity = Users.class, mappedBy = "userTypeId", cascade = CascadeType.ALL)
     private List<Users> users;
 
 
-    public UsersType(Long i, String recruter) {
-        this.userTypeId = i;
-        this.userTypeName = recruter;
+    public UsersType( String recruiter) {
+        this.userTypeName = recruiter;
     }
 }
