@@ -1,4 +1,4 @@
-package com.junaeid.jobportal.controller.config;
+package com.junaeid.jobportal.config;
 
 import com.junaeid.jobportal.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

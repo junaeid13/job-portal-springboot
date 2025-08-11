@@ -1,4 +1,4 @@
-package com.junaeid.jobportal.controller.config;
+package com.junaeid.jobportal.config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

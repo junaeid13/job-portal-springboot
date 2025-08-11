@@ -1,4 +1,4 @@
-package com.junaeid.jobportal.controller.config;
+package com.junaeid.jobportal.config;
 
 import com.junaeid.jobportal.entity.UsersType;
 import com.junaeid.jobportal.repository.UsersRepository;
