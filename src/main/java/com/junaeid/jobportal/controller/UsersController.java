@@ -2,13 +2,13 @@ package com.junaeid.jobportal.controller;
 
 import com.junaeid.jobportal.entity.Users;
 import com.junaeid.jobportal.entity.UsersType;
-import com.junaeid.jobportal.repository.UsersTypeRepository;
 import com.junaeid.jobportal.services.UsersService;
 import com.junaeid.jobportal.services.UsersTypeService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -52,7 +52,8 @@ public class UsersController {
             return "register";
         }
         usersService.addNew(users);
-        return "dashboard";
+
+      return "/dashboard";
 
     }
 
