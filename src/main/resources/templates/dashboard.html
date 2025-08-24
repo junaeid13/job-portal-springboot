@@ -41,36 +41,38 @@
         <ul class="navbar-nav m-auto mt-2 mt-lg-0">
 
             <li class="nav-item active">
-                <a sec:authorize="hasAuthority('Job Seeker')" class="nav-link" th:href="@{/dashboard/}"
+                <a sec:authorize="hasAuthority('ROLE_JobSeeker')" class="nav-link" th:href="@{/dashboard/}"
                 ><i class="fas fa-search"></i>Search for Jobs</a
                 >
             </li>
             <li class="nav-item ">
-                <a sec:authorize="hasAuthority('Job Seeker')" class="nav-link" th:href="@{/saved-jobs/}">
+                <a sec:authorize="hasAuthority('ROLE_JobSeeker')" class="nav-link" th:href="@{/saved-jobs/}">
                     <i class="fa-solid fa-eye"></i>View Saved Jobs</a>
             </li>
             <li class="nav-item ">
-                <a sec:authorize="hasAuthority('Job Seeker')" class="nav-link" th:href="@{/job-seeker-profile/}">
+                <a sec:authorize="hasAuthority('ROLE_JobSeeker')" class="nav-link" th:href="@{/job-seeker-profile/}">
                     <i class="fa-solid fa-pencil"></i>Edit Profile</a>
             </li>
 
             <li class="nav-item ">
-                <a sec:authorize="hasAuthority('Recruiter')" class="nav-link" th:href="@{/dashboard/add}"
+                <a sec:authorize="hasAuthority('ROLE_Recruiter')" class="nav-link" th:href="@{/dashboard/add}"
                 ><i class="fa-solid fa-file-circle-plus"></i>Post New Job</a
                 >
             </li>
             <li class="nav-item active">
-                <a sec:authorize="hasAuthority('Recruiter')" class="nav-link" th:href="@{/dashboard/}"
+                <a sec:authorize="hasAuthority('ROLE_Recruiter')" class="nav-link" th:href="@{/dashboard/}"
                 > <i class="fa-solid fa-eye"></i>View Your Jobs</a
                 >
             </li>
             <li class="nav-item ">
-                <a sec:authorize="hasAuthority('Recruiter')" class="nav-link" th:href="@{/recruiter-profile/}"
+                <a sec:authorize="hasAuthority('ROLE_Recruiter')" class="nav-link" th:href="@{/recruiter-profile/}"
                 > <i class="fa-solid fa-pencil"></i>Edit Account</a
                 >
             </li>
 
         </ul>
+        <!-- Safe check -->
+        <!-- <img th:if="${user?.photosImagePath != null}" /> -->
         <!--<label th:if="${user.firstName != null && user.lastName != null}"
                th:text="${user.firstName+' '+user.lastName}"
                class="nav-item nav-link px-2 me-3">

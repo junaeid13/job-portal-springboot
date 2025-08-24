@@ -9,13 +9,13 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
-@Table(name="recruiter_profile")
+@Table(name = "recruiter_profile")
 public class RecruiterProfile {
     @Id
     private int userAccountId;
 
     @OneToOne
-    @JoinColumn(name="user_account_id")
+    @JoinColumn(name = "user_account_id")
     @MapsId
     private Users user;
 
@@ -30,5 +30,13 @@ public class RecruiterProfile {
 
     public RecruiterProfile(Users savedUser) {
         this.user = savedUser;
+    }
+
+    @Transient
+    public String getPhotoImagePath() {
+        if (profilePhoto == null)
+            return null;
+        return "/photos/recruiter/" + userAccountId + "/" + profilePhoto;
+
     }
 }

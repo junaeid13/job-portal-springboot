@@ -1,5 +1,6 @@
 package com.junaeid.jobportal.services;
 
+
 import com.junaeid.jobportal.entity.Users;
 import com.junaeid.jobportal.repository.UsersRepository;
 import com.junaeid.jobportal.util.CustomUserDetails;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -19,11 +21,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.usersRepository = usersRepository;
     }
 
-
     @Override
-    public UserDetails loadUserByUsername(String username)throws UsernameNotFoundException{
-        Users users = usersRepository.findByEmail(username).orElseThrow(()->
-                new UsernameNotFoundException("Could not find user with username: " + username));
-        return new CustomUserDetails(users);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Users user = usersRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Could not found user"));
+        return new CustomUserDetails(user);
     }
 }

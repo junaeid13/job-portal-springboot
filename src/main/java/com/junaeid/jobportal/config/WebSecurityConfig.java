@@ -46,7 +46,6 @@ public class WebSecurityConfig {
             "/favicon.ico",
             "/error",
             "/h2-console/**",
-            "/dashboard/**",
     };
 
     @Bean

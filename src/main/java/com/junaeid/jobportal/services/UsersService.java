@@ -68,10 +68,10 @@ public class UsersService {
                     UsernameNotFoundException("Username not found"));
             int userId = users.getUserId();
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("Recruiter"))) {
-                RecruiterProfile recruiterProfile = recruiterProfileRepository.findById(userId).orElse(new
+                return recruiterProfileRepository.findById(userId).orElse(new
                         RecruiterProfile());
             } else {
-                JobSeekerProfile jobSeekerProfile = jobSeekerProfileRepository.findById(userId).orElse(new
+                return jobSeekerProfileRepository.findById(userId).orElse(new
                         JobSeekerProfile());
             }
         }
