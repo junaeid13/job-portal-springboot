@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -44,15 +45,15 @@ public class RecruiterProfileController {
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
-            Users users = usersRepository.findByEmail(currentUsername).orElseThrow(() -> new
-                    UsernameNotFoundException("Username not found"));
+            Users users = usersRepository.findByEmail(currentUsername)
+                    .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
             Optional<RecruiterProfile> recruiterProfile = recruiterProfileService
                     .getOne(users.getUserId());
-            model.addAttribute("profile", recruiterProfile);
-        } else {
-            model.addAttribute("profile", new RecruiterProfile());
+            System.out.println(recruiterProfile.get());
+            if (!recruiterProfile.isEmpty())
+                model.addAttribute("profile", recruiterProfile.get());
         }
-        return "recruiter_Profile";
+        return "recruiter_profile";
     }
 
     @PostMapping("/addNew")
@@ -62,28 +63,35 @@ public class RecruiterProfileController {
             Model model
     ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
-            Users users = usersRepository.findByEmail(currentUsername).orElseThrow(() -> new
-                    UsernameNotFoundException("Username not found"));
+            Users users = usersRepository.findByEmail(currentUsername)
+                    .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
             recruiterProfile.setUserAccountId(users.getUserId());
             recruiterProfile.setUser(users);
         }
-        model.addAttribute("recruiterProfile", recruiterProfile);
-        String fileName = "";
-        if (!multipartFile.getOriginalFilename().equals("")) {
-            fileName = StringUtils
-                    .cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-            recruiterProfile.setFirstName(fileName);
-        }
-        RecruiterProfile savedUser = recruiterProfileService.addNew(recruiterProfile);
 
-        String uploadDir = "photos/recruiter/" + savedUser.getUserAccountId();
-        try {
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        } catch (Exception e) {
-            e.printStackTrace();
+        model.addAttribute("recruiterProfile", recruiterProfile);
+
+
+        if (!multipartFile.isEmpty()) {
+            String fileName = StringUtils
+                    .cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+            recruiterProfile.setProfilePhoto(fileName);
+
+            RecruiterProfile savedUser = recruiterProfileService.addNew(recruiterProfile);
+
+            String uploadDir = "/photos/recruiter/" + savedUser.getUserAccountId();
+            try {
+                FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            recruiterProfileService.addNew(recruiterProfile);
         }
+
         return "redirect:/dashboard";
     }
 }
