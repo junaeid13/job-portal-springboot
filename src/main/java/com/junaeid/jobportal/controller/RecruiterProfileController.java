@@ -49,7 +49,7 @@ public class RecruiterProfileController {
                     .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
             Optional<RecruiterProfile> recruiterProfile = recruiterProfileService
                     .getOne(users.getUserId());
-            System.out.println(recruiterProfile.get());
+            System.out.println(recruiterProfile.get().getPhotoImagePath());
             if (!recruiterProfile.isEmpty())
                 model.addAttribute("profile", recruiterProfile.get());
         }

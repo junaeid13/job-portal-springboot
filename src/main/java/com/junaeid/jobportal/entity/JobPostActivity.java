@@ -1,0 +1,46 @@
+package com.junaeid.jobportal.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
+import java.util.Date;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class JobPostActivity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "postedById", referencedColumnName = "userId")
+    private Users postedById;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "jobLocationId", referencedColumnName = "id")
+    private JobLocation jobLocationId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "jonCompanyId", referencedColumnName = "Id")
+    private JobCompany jobCompanyId;
+
+    @Transient
+    private boolean isActive;
+
+    @Transient
+    private boolean isSaved;
+
+    @Length(max = 10000)
+    private String descriptionOfJob;
+
+    private String jobType;
+    private String Salary;
+    private String remote;
+    private Date postedDate;
+    private String jobTitle;
+}
