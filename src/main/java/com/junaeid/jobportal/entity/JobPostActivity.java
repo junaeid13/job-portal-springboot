@@ -15,7 +15,7 @@ import java.util.Date;
 public class JobPostActivity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long JobPostId;
 
     @ManyToOne
     @JoinColumn(name = "postedById", referencedColumnName = "userId")
