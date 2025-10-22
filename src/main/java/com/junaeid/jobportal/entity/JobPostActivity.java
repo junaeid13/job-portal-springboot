@@ -3,6 +3,7 @@ package com.junaeid.jobportal.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -41,6 +42,8 @@ public class JobPostActivity {
     private String jobType;
     private String Salary;
     private String remote;
+
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date postedDate;
     private String jobTitle;
 }
