@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
 
-    private Users user;
+    private final Users user;
 
     public CustomUserDetails(Users user) {
         this.user = user;
@@ -54,5 +54,9 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Users getUser() {
+        return user;
     }
 }

@@ -100,23 +100,18 @@
         </div>
         <div class="box mt-3">
             <label class="large-label px-3 mb-3" sec:authorize="hasAuthority('ROLE_JobSeeker')">Search Results</label>
-            <th:block th:each="jobPost:${jobPost}">
-                <a
-                        th:href="@{/job-details-apply/{id}(id=${jobPost.jobPostId})}"
-                        style="text-decoration: none; color: black"
-                >
-                    <div
-                            onclick="window.location=/job-details-apply/{id}(id=${jobPost.jobPostId})"
-                            class="job-row"
-                    >
-                        <div class="row">
+            <th:block th:each="jobPost : ${jobPost}">
+                <a th:href="@{/job-details-apply/{id}(id=${jobPost.jobPostId})}" style="text-decoration: none; color: black">
+                    <div class="job-row"
+                         th:onclick="'window.location.href=\'/job-details-apply/' + ${jobPost.jobPostId} + '\';'">
+                    <div class="row">
                             <div class="col-md-4">
                                 <label class="job-title text-left">
                                     [[${jobPost.jobTitle}]]
                                     <span
                                             class="title-span"
                                             sec:authorize="hasAuthority('ROLE_Recruiter')"
-                                            th:text="'('+ @{${jobPost.totalCandidates}}+' Candidates Applied)'"
+                                            th:text="'('+ ${jobPost.totalCandidates}+' Candidates Applied)'"
                                     >(xx candidates applied)</span
                                     >
                                     <span
