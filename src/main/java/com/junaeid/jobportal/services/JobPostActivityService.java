@@ -21,6 +21,7 @@ public class JobPostActivityService {
 
     public List<RecruiterJobsDto> getRecruiterJobs(int recruiter) {
         List<IRecruiterJobs> recruiterJobsDto = jobPostActivityRepository.getRecruiterJobs(recruiter);
+        System.out.println("From Service: recruiterJobsDto = " + recruiterJobsDto);
         List<RecruiterJobsDto> recruiterJobsDtoList = new ArrayList<>();
         for (IRecruiterJobs iRecruiterJobs : recruiterJobsDto) {
             JobLocation loc = new JobLocation(

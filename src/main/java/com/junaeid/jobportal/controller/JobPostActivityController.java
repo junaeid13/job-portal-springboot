@@ -42,6 +42,10 @@ public class JobPostActivityController {
         Users user = userDetails.getUser();
         //System.out.println("UserType: " + user.getUserTypeId().getUserTypeName());
         //System.out.println("Profile class: " + user.getClass().getName());
+        System.out.println("Authorities = " + authentication.getAuthorities());
+        System.out.println("currentUserProfile = " + currentUserProfile);
+        System.out.println("currentUserProfile type = " +
+                (currentUserProfile == null ? "NULL" : currentUserProfile.getClass().getName()));
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
             model.addAttribute("username", currentUserName);

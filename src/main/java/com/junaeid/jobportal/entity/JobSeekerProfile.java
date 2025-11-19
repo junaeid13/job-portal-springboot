@@ -11,14 +11,14 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name="job_seeker_profile")
+@Table(name = "job_seeker_profile")
 public class JobSeekerProfile {
 
     @Id
     private int userAccountId;
 
     @OneToOne
-    @JoinColumn(name="user_account_id")
+    @JoinColumn(name = "user_account_id")
     @MapsId
     private Users userId;
     private String firstName;
@@ -29,11 +29,15 @@ public class JobSeekerProfile {
     private String workAuthorization;
     private String employmentType;
     private String resume;
-    @Column(nullable = true, length=64)
+    @Column(nullable = true, length = 64)
     private String profilePhoto;
 
-    @OneToMany(targetEntity = Skills.class, cascade = CascadeType.ALL,mappedBy ="jobSeekerProfile" )
+    @OneToMany(targetEntity = Skills.class, cascade = CascadeType.ALL, mappedBy = "jobSeekerProfile")
     private List<Skills> skills;
+
+    @ManyToOne
+    @JoinColumn(name = "applied_job_id")
+    private JobPostActivity appliedJob;
 
     public JobSeekerProfile(Users savedUser) {
         this.userId = savedUser;

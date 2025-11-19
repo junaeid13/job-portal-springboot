@@ -27,7 +27,7 @@ public class JobPostActivity {
     private JobLocation jobLocationId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "jonCompanyId", referencedColumnName = "Id")
+    @JoinColumn(name = "jobCompanyId", referencedColumnName = "Id")
     private JobCompany jobCompanyId;
 
     @Transient

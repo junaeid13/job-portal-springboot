@@ -117,13 +117,13 @@
                                     <span
                                             class="title-span"
                                             sec:authorize="hasAuthority('ROLE_JobSeeker')"
-                                            th:if="${jobPost.isActive == true}"
+                                    <!-- th:if="${jobPost.isActive == true}"-->
                                     >(Applied)</span
                                     >
                                     <span
                                             class="title-span"
                                             sec:authorize="hasAuthority('ROLE_JobSeeker')"
-                                            th:if="${jobPost.isSaved == true}"
+                                    <!--  th:if="${jobPost.isSaved == true}"-->
                                     >(Saved)</span
                                     >
                                 </label>
@@ -136,7 +136,7 @@
                                 >
                             </div>
                             <div class="col-md-4 text-right">
-                                <label th:text="@{${jobPost.jobCompanyId.name}}"
+                                <label th:text="${jobPost.jobCompanyId.name}"
                                 >Recruiter Company Name</label
                                 >
                             </div>
