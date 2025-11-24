@@ -56,6 +56,7 @@ public class JobPostActivityController {
                         .getRecruiterJobs(recruiterProfile
                                 .getUserAccountId());
                 model.addAttribute("jobPost", recruiterJobs);
+                System.out.println("recruiterJobs = " + recruiterJobs);
             }
         }
         model.addAttribute("user", currentUserProfile);

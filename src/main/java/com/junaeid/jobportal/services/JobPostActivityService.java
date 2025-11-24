@@ -25,20 +25,26 @@ public class JobPostActivityService {
         List<RecruiterJobsDto> recruiterJobsDtoList = new ArrayList<>();
         for (IRecruiterJobs iRecruiterJobs : recruiterJobsDto) {
             JobLocation loc = new JobLocation(
-                    iRecruiterJobs.getLocation_id(),
+                    iRecruiterJobs.getLocationId(),
                     iRecruiterJobs.getCity(),
                     iRecruiterJobs.getState(),
                     iRecruiterJobs.getCountry()
             );
-            JobCompany company = new JobCompany(iRecruiterJobs.getCompany_id(), iRecruiterJobs.getCompanyName(), "");
+            JobCompany company = new JobCompany(iRecruiterJobs.getCompanyId(), iRecruiterJobs.getCompanyName(), "");
             recruiterJobsDtoList.add(new RecruiterJobsDto(
                     iRecruiterJobs.getTotalCandidates(),
-                    iRecruiterJobs.getJob_post_id(),
-                    iRecruiterJobs.getJob_title(),
+                    iRecruiterJobs.getJobPostId(),
+                    iRecruiterJobs.getJobTitle(),
                     loc,
                     company
             ));
         }
         return recruiterJobsDtoList;
+    }
+
+    public JobPostActivity getOne(int id) {
+        return jobPostActivityRepository
+                .findById(id)
+                .orElseThrow(()->new RuntimeException("Job not Found"));
     }
 }

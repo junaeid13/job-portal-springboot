@@ -3,11 +3,11 @@ package com.junaeid.jobportal.entity;
 public interface IRecruiterJobs {
     Long getTotalCandidates();
 
-    Integer getJob_post_id();
+    Integer getJobPostId();
 
-    String getJob_title();
+    String getJobTitle();
 
-    Integer getLocation_id();
+    Integer getLocationId();
 
     String getCity();
 
@@ -15,7 +15,7 @@ public interface IRecruiterJobs {
 
     String getCountry();
 
-    Integer getCompany_id();
+    Integer getCompanyId();
 
     String getCompanyName();
 }

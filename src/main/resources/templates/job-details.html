@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Job Details</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+</head>
+
+<body th:object="${jobDetails}" style="font-family: 'Montserrat'; height:100%;">
+
+<header class="navbar navbar-expand-lg navbar-dark">
+    <div class="d-flex align-items-center ms-5 mt-2">
+        <a class="h5 text-white text-decoration-none" th:href="@{/dashboard/}">hotdevjobs</a>
+        <span class="h5 text-white">.com</span>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav m-auto">
+
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_JobSeeker')">
+                <a class="nav-link" th:href="@{/dashboard/}">
+                    <i class="fas fa-search"></i> Search for Jobs
+                </a>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_JobSeeker')">
+                <a class="nav-link" th:href="@{/saved-jobs/}">
+                    <i class="fa-solid fa-eye"></i> View Saved Jobs
+                </a>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_JobSeeker')">
+                <a class="nav-link" th:href="@{/job-seeker-profile/}">
+                    <i class="fa-solid fa-pencil"></i> Edit Profile
+                </a>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_Recruiter')">
+                <a class="nav-link" th:href="@{/dashboard/add}">
+                    <i class="fa-solid fa-file-circle-plus"></i> Post New Job
+                </a>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_Recruiter')">
+                <a class="nav-link" th:href="@{/dashboard/}">
+                    <i class="fa-solid fa-eye"></i> View Your Jobs
+                </a>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_Recruiter')">
+                <a class="nav-link" th:href="@{/recruiter-profile/}">
+                    <i class="fa-solid fa-pencil"></i> Edit Account
+                </a>
+            </li>
+
+        </ul>
+
+        <!--<img th:src="${profile.photoImagePath}" class="rounded-circle"/>
+        <label th:text="${profile.firstName + ' ' + profile.lastName}"></label>-->
+
+
+        <button class="myBtn-light me-5" onclick="window.location.href='/logout'">
+            Logout
+        </button>
+    </div>
+</header>
+
+<section class="section">
+
+    <article>
+        <div class="box px-3">
+            <a id="back-link" class="mt-3 ms-3 primary text-decoration-none">
+                <i class="fa-solid fa-angle-left me-1"></i> Back to Search Results
+            </a>
+
+            <h1 class="primary-title mt-3">Job Details</h1>
+
+            <div class="ms-3">
+                <h4 class="job-title text-left" th:text="${jobDetails.jobTitle}">Job Title</h4>
+
+                <p class="m-0"
+                   th:text="${jobDetails.jobLocationId.city + ', ' + jobDetails.jobLocationId.state}">
+                </p>
+
+                <p th:text="${jobDetails.jobCompanyId.name}"></p>
+            </div>
+        </div>
+
+        <div class="box mt-3">
+            <label class="large-label px-3 mt-3">Job Specs</label>
+
+            <div class="job-row px-3">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Date Posted:
+                            <span th:text="${jobDetails.postedDate}"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-md-3 text-center">
+                        <label>Salary:
+                            <span th:text="${jobDetails.salary}"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-md-3 text-center">
+                        <label>Type:
+                            <span th:text="${jobDetails.jobType}"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-md-3 text-right">
+                        <label>Remote:
+                            <span th:text="${jobDetails.remote}"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-3 mb-3" sec:authorize="hasAuthority('ROLE_JobSeeker')">
+                <label class="large-label">Job Description</label>
+                <div th:utext="${jobDetails.descriptionOfJob}"></div>
+            </div>
+
+            <div class="px-3 mb-3" sec:authorize="hasAuthority('ROLE_Recruiter')">
+                <div class="row">
+                    <div class="col-md-9">
+                        <label class="large-label">Job Description</label>
+                        <div th:utext="${jobDetails.descriptionOfJob}"></div>
+                    </div>
+
+                    <div class="col-md-3 centerCandidate">
+                        <div class="candidatesApplied">
+                            <label>Candidates Applied</label>
+
+                            <th:block th:each="applyList : ${applyList}">
+                                <a class="white"
+                                   th:href="@{/job-seeker-profile/{id}(id=${applyList.userId.userAccountId})}"
+                                   th:text="${applyList.userId.firstName + ', ' + applyList.userId.lastName}">
+                                </a>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 px-3" sec:authorize="hasAuthority('ROLE_JobSeeker')">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <form th:action="@{/job-details/apply/{id}(id=${jobDetails.jobPostId})}" method="post">
+                            <button class="btn-sec btn-red w-100"
+                                    th:if="${alreadyApplied == false}">
+                                Apply Now
+                            </button>
+                            <button class="btn-sec btn-red w-100" disabled
+                                    th:if="${alreadyApplied == true}">
+                                Already Applied
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="col-md-3">
+                        <form th:action="@{/job-details/save/{id}(id=${jobDetails.jobPostId})}" method="post">
+                            <button class="btn-sec btn-black w-100"
+                                    th:if="${alreadySaved == false}">
+                                Save Job
+                            </button>
+                            <button class="btn-sec btn-black w-100" disabled
+                                    th:if="${alreadySaved == true}">
+                                Already Saved
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </article>
+</section>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<script>
+    const back = document.getElementById('back-link');
+    back.setAttribute('href', document.referrer);
+</script>
+
+</body>
+</html>
