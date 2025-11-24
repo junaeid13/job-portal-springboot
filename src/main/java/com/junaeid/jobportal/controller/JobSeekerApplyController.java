@@ -1,11 +1,8 @@
 package com.junaeid.jobportal.controller;
 
-
 import com.junaeid.jobportal.entity.JobPostActivity;
-import com.junaeid.jobportal.entity.RecruiterProfile;
 import com.junaeid.jobportal.entity.Users;
 import com.junaeid.jobportal.services.JobPostActivityService;
-import com.junaeid.jobportal.services.RecruiterProfileService;
 import com.junaeid.jobportal.services.UsersService;
 import com.junaeid.jobportal.util.CustomUserDetails;
 import org.springframework.security.core.Authentication;
@@ -15,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Optional;
 
 @Controller
 public class JobSeekerApplyController {
