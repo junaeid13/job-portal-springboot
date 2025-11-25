@@ -60,6 +60,13 @@ public class JobPostActivityController {
                 System.out.println("recruiterJobs = " + recruiterJobs);
             }
         }
+
+        model.addAttribute("isRecruiter", authentication.getAuthorities()
+                .contains(new SimpleGrantedAuthority("ROLE_Recruiter")));
+        model.addAttribute("isJobSeeker", authentication
+                .getAuthorities().contains(new SimpleGrantedAuthority("ROLE_JobSeeker")));
+
+
         model.addAttribute("user", currentUserProfile);
         return "dashboard";
     }

@@ -1,0 +1,46 @@
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="d-flex align-items-center ms-5 mt-2">
+            <a class="h5 text-white text-decoration-none" th:href="@{/dashboard/}">JobPortal</a>
+            <span class="h5 text-white">.com</span>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav m-auto mt-2 mt-lg-0">
+                <!-- JobSeeker Links -->
+                <li class="nav-item" th:if="${isJobSeeker}">
+                    <a class="nav-link" th:href="@{/dashboard/}"><i class="fas fa-search"></i> Search for Jobs</a>
+                </li>
+                <li class="nav-item" th:if="${isJobSeeker}">
+                    <a class="nav-link" th:href="@{/saved-jobs/}"><i class="fa-solid fa-eye"></i> View Saved Jobs</a>
+                </li>
+                <li class="nav-item" th:if="${isJobSeeker}">
+                    <a class="nav-link" th:href="@{/job-seeker-profile/}"><i class="fa-solid fa-pencil"></i> Edit Profile</a>
+                </li>
+
+                <!-- Recruiter Links -->
+                <li class="nav-item" th:if="${isRecruiter}">
+                    <a class="nav-link" th:href="@{/dashboard/add}"><i class="fa-solid fa-file-circle-plus"></i> Post New Job</a>
+                </li>
+                <li class="nav-item" th:if="${isRecruiter}">
+                    <a class="nav-link" th:href="@{/dashboard/}"><i class="fa-solid fa-eye"></i> View Your Jobs</a>
+                </li>
+                <li class="nav-item" th:if="${isRecruiter}">
+                    <a class="nav-link" th:href="@{/recruiter-profile/}"><i class="fa-solid fa-pencil"></i> Edit Account</a>
+                </li>
+            </ul>
+
+            <!-- User Name -->
+            <span class="nav-item nav-link px-2 me-3" th:if="${user.firstName != null and user.lastName != null}"
+                  th:text="${user.firstName + ' ' + user.lastName}"></span>
+            <span class="nav-item nav-link px-2 me-3" th:unless="${user.firstName != null and user.lastName != null}"
+                  th:text="${username}"></span>
+
+            <button class="myBtn-light me-5" onclick="window.location.href='/logout'">Logout</button>
+        </div>
+    </nav>
+</div>
