@@ -44,15 +44,19 @@ public class RecruiterProfileController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
+
             String currentUsername = authentication.getName();
             Users users = usersRepository.findByEmail(currentUsername)
                     .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-            Optional<RecruiterProfile> recruiterProfile = recruiterProfileService
-                    .getOne(users.getUserId());
-            System.out.println(recruiterProfile.get().getPhotoImagePath());
-            if (!recruiterProfile.isEmpty())
-                model.addAttribute("profile", recruiterProfile.get());
+
+            Optional<RecruiterProfile> recruiterProfileOpt =
+                    recruiterProfileService.getOne(users.getUserId());
+
+            // Always add a profile object
+            RecruiterProfile profile = recruiterProfileOpt.orElse(new RecruiterProfile());
+            model.addAttribute("profile", profile);
         }
+
         return "recruiter_profile";
     }
 
