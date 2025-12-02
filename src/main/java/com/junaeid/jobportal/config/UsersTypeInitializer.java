@@ -4,7 +4,6 @@ import com.junaeid.jobportal.entity.Users;
 import com.junaeid.jobportal.entity.UsersType;
 import com.junaeid.jobportal.repository.UsersRepository;
 import com.junaeid.jobportal.repository.UsersTypeRepository;
-import org.hibernate.usertype.UserType;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
